@@ -1,13 +1,11 @@
-/* style.css 최종 안정화 및 조정본 (스크롤바 표시 수정 완료) */
+/* style.css 최종 안정화 및 조정본 (모든 갤러리 스타일 통일 및 반응형/스크롤 기능 통합) */
 
 /* ---------------------------------------------------- */
 /* 1. 웹사이트 전체의 기본 서체 및 너비 리셋 */
 /* ---------------------------------------------------- */
 html, body { 
     width: 100%;
-    /* 스크롤바 표시를 위해 height 설정을 제거 */
     height: unset; 
-    /* 스크롤바 숨김 설정을 제거하고 기본 동작으로 되돌림 */
     overflow-y: unset; 
 }
 body {
@@ -18,12 +16,11 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* 수평 스크롤은 발생하지 않도록 유지 */
     overflow-x: unset; 
 }
 
 /* ---------------------------------------------------- */
-/* 2. 상단 헤더 스타일 (고정 및 좌/우/상 여백 50px 통일) */
+/* 2. 상단 헤더 스타일 (고정 및 스크롤 축소 기능 포함) */
 /* ---------------------------------------------------- */
 .main-header {
     position: fixed; 
@@ -40,13 +37,29 @@ body {
     margin: 0; 
     padding: 20px 50px 10px 50px; 
     box-sizing: border-box; 
+    
+    /* 스크롤 축소 기능을 위한 CSS */
+    transition: padding 0.3s ease, height 0.3s ease, box-shadow 0.3s ease;
 }
+
+/* 스크롤 시 헤더 축소 스타일 (JavaScript 필요) */
+.main-header.shrink {
+    padding-top: 10px; 
+    padding-bottom: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.main-header.shrink .logo a {
+    font-size: 18px;
+}
+
 .main-header .logo a {
     color: inherit; 
     text-decoration: none; 
     cursor: pointer; 
     font-size: 20px; 
     font-weight: 500; 
+    transition: font-size 0.3s ease;
 }
 
 /* ---------------------------------------------------- */
@@ -94,16 +107,22 @@ body {
 }
 
 /* ---------------------------------------------------- */
-/* 5. 갤러리 섹션 (Drawings/Works 페이지) 스타일 (3열 배치, 크기 확대, 호버 효과) */
+/* 5 & 6. 갤러리 스타일 통합: Index, Drawings, Works 모두 4열 Grid 레이아웃 사용 */
 /* ---------------------------------------------------- */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 20px; 
-    max-width: 1400px;
-    margin: 80px auto;
-    padding: 0 50px;
+
+/* 갤러리 컨테이너: Drawings/Works의 .gallery-grid와 Index의 .art-display-row 통합 */
+.gallery-grid, .art-display-row {
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); /* 모든 갤러리를 기본 4열 배치 */
+    gap: 70px; /* PC 간격 통일 */
+    max-width: 1200px;
+    margin: 80px auto; /* 중앙 정렬 */
+    padding: 0 50px; 
+    overflow-x: visible; 
+    overflow-y: visible; 
 }
+
+/* 갤러리 아이템 (Drawings/Works 페이지) */
 .gallery-item {
     cursor: pointer;
     overflow: hidden;
@@ -111,7 +130,9 @@ body {
     box-shadow: none !important; 
     border: none !important; 
 }
-.gallery-item img {
+
+/* 이미지 스타일: Index, Drawings, Works 모두 동일 적용 */
+.gallery-item img, .art-display-row img {
     width: 100%;
     height: auto;
     display: block;
@@ -119,46 +140,19 @@ body {
     box-shadow: none !important;
     border: none !important;
     opacity: 1; 
+    margin: 0;
+    padding: 0;
 }
-.gallery-item img:hover {
+
+/* 호버 효과 통일 */
+.gallery-item img:hover, .art-display-row img:hover {
     transform: scale(1.03);
     opacity: 0.7; 
 }
 
-/* ---------------------------------------------------- */
-/* 6. 메인 페이지 전용: Grid 갤러리 스타일 (4열 배치, 호버 효과) */
-/* ---------------------------------------------------- */
-.art-display-row {
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); /* index.html은 4개 배치를 유지 */
-    gap: 70px; 
-    max-width: 1200px;
-    margin: 0 auto; 
-    padding: 0 50px 100px 50px; 
-
-    overflow-x: visible; 
-    overflow-y: visible; 
-}
-
-.art-display-row img {
-    width: 100%; 
-    height: auto; 
-    display: block; 
-    margin: 0;
-    padding: 0;
-    
-    cursor: pointer; 
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    opacity: 1; 
-}
-
-.art-display-row img:hover {
-    transform: scale(1.03); 
-    opacity: 0.7; 
-}
 
 /* ---------------------------------------------------- */
-/* 7. 메인 페이지 모달 스타일 (이미지 확대, 흰색 블러) */
+/* 7. 메인 페이지 모달 스타일 */
 /* ---------------------------------------------------- */
 .modal {
     position: fixed; 
@@ -221,45 +215,88 @@ body {
 /* ---------------------------------------------------- */
 
 /* ---------------------------------------------------- */
-/* 8. Drawing, Works, About, Contact 페이지 콘텐츠 패딩 (공통) */
+/* 8 & 9. 콘텐츠 패딩 (모든 페이지 상단 여백 통일) */
 /* ---------------------------------------------------- */
-.drawing-content {
-    padding-top: 120px; /* PC에서의 상단 여백 */
-}
-
-/* ---------------------------------------------------- */
-/* 9. 메인 콘텐츠 (index.html) 스타일 */
-/* ---------------------------------------------------- */
-.main-content {
-    width: 100%; 
-    padding-top: 150px; 
+.drawing-content, .main-content {
+    width: 100%;
+    /* 상단 고정 헤더 아래에 콘텐츠가 깔끔하게 시작하도록 여유로운 여백 확보 */
+    padding-top: 170px; 
 }
 
 
 /* ---------------------------------------------------- */
-/* 📢 10. 모든 페이지 콘텐츠 반응형 (Grid 방식으로 최종 적용) */
+/* 📢 10. 모든 페이지 반응형 (통일된 갤러리 레이아웃 기반) */
 /* ---------------------------------------------------- */
 
-/* 📱 태블릿 (화면 너비 1024px 이하): PC 4열 -> 3열, Drawings 3열 -> 2열 */
+/* 📱 태블릿 (화면 너비 1024px 이하): 4열 -> 3열 */
 @media (max-width: 1024px) {
-    /* 메인 갤러리: 4열 -> 3열로 변경 */
-    .art-display-row {
+    /* 모든 갤러리 3열로 변경 */
+    .gallery-grid, .art-display-row {
         grid-template-columns: repeat(3, 1fr);
         gap: 40px; 
     }
-
-    /* Drawings/Works 갤러리: 3열 -> 2열로 변경 */
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-        padding: 0 30px; 
-    }
-
     /* About/Contact 등 일반 콘텐츠 페이지 상단 여백 */
-    .drawing-content { 
+    .drawing-content, .main-content { 
         padding-top: 100px; 
     }
 }
 
 
-/* 📱 모바일 (화
+/* 📱 모바일 (화면 너비 768px 이하): 갤러리 2열, 헤더/본문 조정 */
+@media (max-width: 768px) {
+    
+    /* 1. 상단 헤더 메뉴 모바일 최적화 (세로 정렬) */
+    .main-header {
+        flex-direction: column; 
+        align-items: center; 
+        padding: 15px 20px 10px 20px; 
+    }
+    
+    .main-nav ul {
+        flex-direction: column; 
+        align-items: center;
+        margin-top: 10px;
+    }
+    
+    .main-nav ul li {
+        margin: 5px 0; 
+    }
+
+    /* 2. 갤러리 (메인, Drawings, Works) 모두 2열로 통일 */
+    .gallery-grid, .art-display-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px; 
+        padding: 0 15px 50px 15px; 
+    }
+
+    /* 3. 모든 콘텐츠 상단 패딩 조정 */
+    .drawing-content, .main-content { 
+        padding-top: 140px; 
+        padding-left: 15px;
+        padding-right: 15px;
+        line-height: 1.5;
+    }
+    
+    /* 4. 왼쪽 하단 드로잉 이미지 크기/위치 조정 */
+    .small-drawing {
+        width: 50px; 
+        left: 15px; 
+        bottom: 15px; 
+    }
+}
+
+
+/* 📱 초소형 모바일 (화면 너비 480px 이하): 갤러리 1열 */
+@media (max-width: 480px) {
+    /* 갤러리를 1열로 변경 */
+    .gallery-grid, .art-display-row {
+        grid-template-columns: 1fr;
+    }
+
+    /* 텍스트 가독성 및 공간 확보 */
+    .main-header .logo a, 
+    .main-nav a,
+    .modal-info p {
+        font-size: 0.9em; 
+    }
+}
