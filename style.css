@@ -1,0 +1,236 @@
+/* style.css 최종 안정화 및 조정본 (스크롤바 표시 수정 완료) */
+
+/* ---------------------------------------------------- */
+/* 1. 웹사이트 전체의 기본 서체 및 너비 리셋 */
+/* ---------------------------------------------------- */
+html, body { 
+    width: 100%;
+    /* 👈 CRITICAL FIX: 스크롤바 표시를 위해 height 설정을 제거 (height: unset) */
+    height: unset; 
+    /* 👈 CRITICAL FIX: 스크롤바 숨김 설정을 제거하고 기본 동작으로 되돌림 */
+    overflow-y: unset; 
+}
+body {
+    font-family: 'system-ui', sans-serif; 
+    font-weight: 400; 
+    color: #333; 
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* 수평 스크롤은 발생하지 않도록 유지 */
+    overflow-x: unset; 
+}
+
+/* ---------------------------------------------------- */
+/* 2. 상단 헤더 스타일 (고정 및 좌/우/상 여백 50px 통일) */
+/* ---------------------------------------------------- */
+.main-header {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    background-color: #fff; 
+    width: 100%; 
+    z-index: 50; 
+    
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    
+    margin: 0; 
+    padding: 20px 50px 10px 50px; 
+    box-sizing: border-box; 
+}
+.main-header .logo a {
+    color: inherit; 
+    text-decoration: none; 
+    cursor: pointer; 
+    font-size: 20px; 
+    font-weight: 500; 
+}
+
+/* ---------------------------------------------------- */
+/* 3. 내비게이션 메뉴 스타일 */
+/* ---------------------------------------------------- */
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.main-nav ul li {
+    margin-left: 40px;
+}
+.main-nav a {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400; 
+    letter-spacing: 0.1em;
+    padding-bottom: 2px;
+    transition: color 0.2s ease; 
+}
+.main-nav a:hover {
+    color: #AAAAAA; 
+    text-decoration: underline; 
+}
+.main-nav a.active {
+    color: #AAAAAA; 
+    text-decoration: underline;
+    font-weight: 700; 
+}
+
+/* ---------------------------------------------------- */
+/* 4. 공통: 왼쪽 하단 드로잉 이미지 스타일 */
+/* ---------------------------------------------------- */
+.small-drawing {
+    position: fixed; 
+    left: 50px; 
+    bottom: 50px; 
+    width: 80px; 
+    height: auto;
+    z-index: 1000; 
+    cursor: pointer; 
+}
+
+/* ---------------------------------------------------- */
+/* 5. 갤러리 섹션 (Drawings/Works 페이지) 스타일 (3열 배치, 크기 확대, 호버 효과) */
+/* ---------------------------------------------------- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; 
+    max-width: 1400px;
+    margin: 80px auto;
+    padding: 0 50px;
+}
+.gallery-item {
+    cursor: pointer;
+    overflow: hidden;
+    background-color: transparent !important; 
+    box-shadow: none !important; 
+    border: none !important; 
+}
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease, opacity 0.3s ease; 
+    box-shadow: none !important;
+    border: none !important;
+    opacity: 1; 
+}
+.gallery-item img:hover {
+    transform: scale(1.03);
+    opacity: 0.7; 
+}
+
+/* ---------------------------------------------------- */
+/* 6. 메인 페이지 전용: Grid 갤러리 스타일 (4열 배치, 호버 효과) */
+/* ---------------------------------------------------- */
+.art-display-row {
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); /* index.html은 4개 배치를 유지 */
+    gap: 70px; 
+    max-width: 1200px;
+    margin: 0 auto; 
+    padding: 0 50px 100px 50px; 
+
+    overflow-x: visible; 
+    overflow-y: visible; 
+}
+
+.art-display-row img {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    margin: 0;
+    padding: 0;
+    
+    cursor: pointer; 
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 1; 
+}
+
+.art-display-row img:hover {
+    transform: scale(1.03); 
+    opacity: 0.7; 
+}
+
+/* ---------------------------------------------------- */
+/* 7. 메인 페이지 모달 스타일 (이미지 확대, 흰색 블러) */
+/* ---------------------------------------------------- */
+.modal {
+    position: fixed; 
+    z-index: 100; 
+    padding-top: 50px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    
+    background-color: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(4px); 
+    -webkit-backdrop-filter: blur(4px); 
+
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 90%;
+    box-shadow: none !important;
+    border: none !important;
+}
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #333; 
+    font-size: 40px;
+    font-weight: bold;
+    transition: color 0.3s; 
+    cursor: pointer;
+}
+
+/* 모달 정보 표시 영역 스타일 */
+.modal-info {
+    position: absolute; 
+    top: 50px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    
+    background-color: transparent; 
+    color: black; 
+    
+    padding: 10px 20px;
+    border-radius: 5px;
+    
+    z-index: 101; 
+}
+
+.modal-info p {
+    margin: 0;
+    font-size: 16px; 
+    font-weight: 500;
+}
+/* ---------------------------------------------------- */
+
+/* ---------------------------------------------------- */
+/* 8. Drawing 페이지 콘텐츠 패딩 */
+/* ---------------------------------------------------- */
+.drawing-content {
+    padding-top: 120px; 
+}
+
+/* ---------------------------------------------------- */
+/* 9. 메인 콘텐츠 (index.html) 스타일 */
+/* ---------------------------------------------------- */
+.main-content {
+    width: 100%; 
+    padding-top: 150px; 
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoon sun Ahn - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="main-header">
+        <h1 class="logo">
+            <a href="index.html">Yoon sun Ahn</a>
+        </h1>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="drawing.html">Drawing</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        
+        <section class="art-display-row">
+            <img src="images/ha.jpg" alt="Tree Drawing 1" onclick="openModal('images/ha.jpg')">
+            <img src="images/cover.png" alt="Tree Drawing 2" onclick="openModal('images/cover.png')">
+            <img src="images/moon.png" alt="Tree Drawing 3" onclick="openModal('images/moon.png')">
+            <img src="images/free.jpeg" alt="Tree Drawing 4" onclick="openModal('images/free.jpeg')">
+            <img src="images/train.jpeg" alt="New Drawing 5" onclick="openModal('images/train.jpeg')">
+            <img src="images/clock.png" alt="New Drawing 6" onclick="openModal('images/clock.png')">
+            <img src="images/winter.png" alt="New Drawing 7" onclick="openModal('images/winter.png')">
+            <img src="images/diary.png" alt="New Drawing 8" onclick="openModal('images/diary.png')">
+            <img src="images/blu.jpeg" alt="New Drawing 9" onclick="openModal('images/blu.jpeg')">
+            <img src="images/note.png" alt="New Drawing 10" onclick="openModal('images/note.png')">
+            <img src="images/road.png" alt="New Drawing 11" onclick="openModal('images/road.png')">
+            <img src="images/clo.png" alt="New Drawing 12" onclick="openModal('images/clo.png')">
+        </section>
+    </main>
+    
+    <div id="imageModal" class="modal" onclick="closeModal(event)">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        
+        <div id="imageInfo" class="modal-info">
+            <p id="modalTitle">이미지 제목 (JavaScript가 여기에 내용을 넣습니다)</p>
+        </div>
+        
+    </div>
+
+    <img src="images/think.png" alt="왼쪽 하단 드로잉" class="small-drawing">
+
+    <script src="gallery.js"></script>
+    <script>
+        // gallery.js에 정의된 shuffleGallery 함수를 DOM 로드 후 실행
+        document.addEventListener('DOMContentLoaded', shuffleGallery);
+    </script>
+</body>
+</html>

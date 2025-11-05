@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoon sun Ahn - About</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="about.css"> 
+</head>
+
+<body>
+    <header class="main-header">
+        <h1 class="logo">
+            <a href="index.html">Yoon sun Ahn</a>
+        </h1>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="drawing.html">Drawing</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="about.html" class="active">About</a></li> 
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="about-page">
+        <section class="profile-section">
+            <div class="bio-text">
+                
+                <p>
+                    일상 속 작지만 의미있는 것들을 기록하길 좋아한다.<br>
+                    사진을 찍고 노트에 드로잉하고 짧은 메모를 남기기도 한다.<br>
+                    이런 과정들이 곳곳에 묻어나는 작업을 계속 이어가고 있다.
+                </p>
+            </div>
+
+            <div class="image-gallery-row">
+                <img src="tree.png" alt="About Image 1" onclick="openModal('tree.png')">
+                <img src="treee.png" alt="About Image 2" onclick="openModal('treee.png')">
+                <img src="treeee.png" alt="About Image 3" onclick="openModal('treeee.png')">
+                <img src="tre.png" alt="About Image 4" onclick="openModal('tre.png')">
+            </div>
+        </section>
+        
+    </main>
+    
+    <div id="imageModal" class="modal" onclick="closeModal(event)">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+    
+    <img src="kitty.png" alt="왼쪽 하단 드로잉" class="small-drawing">
+    
+    <script src="gallery.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+/* about.css 최종 안정화 및 통합본 */
+
+/* ---------------------------------------------------- */
+/* 1. About 페이지 기본 레이아웃 및 여백 설정 */
+/* ---------------------------------------------------- */
+.about-page {
+    /* 글 잘림 방지 (헤더 높이보다 충분히 크게 설정) */
+    padding-top: 120px; 
+    padding-left: 50px; 
+    padding-right: 50px;
+    padding-bottom: 50px;
+}
+
+/* 프로필 섹션 (소개글과 이미지 갤러리를 포함) */
+.profile-section {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 소개글 텍스트 영역 */
+.bio-text {
+    max-width: 600px;
+    margin-bottom: 50px;
+}
+
+.bio-text p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ---------------------------------------------------- */
+/* 2. 이미지 갤러리 레이아웃 */
+/* ---------------------------------------------------- */
+.image-gallery-row {
+    display: flex;
+    gap: 40px;
+}
+
+.image-gallery-row img {
+    /* 👈 이미지가 차지하는 너비를 결정하는 핵심 속성입니다. */
+    width: 23%; 
+    max-width: none; 
+    height: auto;
+    display: block;
+    object-fit: contain; 
+    
+    cursor: pointer; 
+}
+
+/* ---------------------------------------------------- */
+/* 3. 모달 (이미지 확대) 스타일 */
+/* ---------------------------------------------------- */
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 100; 
+    padding-top: 50px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.9); 
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 90%;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+/* ---------------------------------------------------- */
+/* 4. 반응형 디자인 */
+/* ---------------------------------------------------- */
+@media (max-width: 1024px) {
+    .image-gallery-row {
+        flex-wrap: wrap; 
+    }
+    
+    .image-gallery-row img {
+        width: 48%; 
+        margin-bottom: 15px;
+    }
+}
+
+/* ---------------------------------------------------- */
+/* 5. About 페이지 전용: 작은 드로잉 크기 조정 */
+/* ---------------------------------------------------- */
+/* 👈 style.css의 설정을 덮어쓰고, About 페이지에서만 150px로 확대 */
+.small-drawing {
+    width: 180px !important; 
+    height: auto !important;
+}

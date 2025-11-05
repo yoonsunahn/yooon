@@ -1,0 +1,119 @@
+/* work.css 최종 수정 및 통합본 */
+
+/* ---------------------------------------------------- */
+/* work.html 전용 메인 콘텐츠 패딩 설정 (👈 새로 추가됨) */
+/* ---------------------------------------------------- */
+.work-content {
+    /* 👈 고정된 헤더(약 80px~100px 높이) 아래에 콘텐츠가 시작되도록 상단에 충분한 여백을 줍니다. */
+    padding-top: 120px; 
+}
+
+/* 1. 현재 페이지 메뉴 활성화 스타일 */
+.main-nav ul li a.active {
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+/* 2. 이미지 갤러리 격자 레이아웃 (2열) */
+.gallery-grid {
+    display: grid;
+    /* 한 줄에 2개의 열(column)을 만듭니다. (2열 * 2줄 = 총 4개) */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 40px; /* 이미지 간의 간격 */
+    padding: 50px 100px;
+    max-width: 1400px; /* 갤러리 최대 너비 설정 (2열에 맞춰 조정) */
+    margin: 0 auto; /* 중앙 정렬 */
+}
+
+/* 3. gallery-item 스타일 */
+.gallery-item {
+    cursor: pointer; 
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out; 
+    background-color: #f7f7f7; /* 이미지 뒷배경 (이미지처럼 연한 회색) */
+    padding: 20px;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03); 
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* --- 4. 이미지 모달(크게 보기 창) 스타일 --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 100; 
+    padding-top: 50px; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(255, 255, 255, 0.95); 
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 800px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#caption {
+    margin: 15px auto;
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+    color: #333;
+    font-size: 16px;
+    padding: 10px 0;
+}
+
+/* 닫기 버튼 */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #000;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.close:hover, .close:focus {
+    color: #bbb;
+}
+
+/* 이전/다음 화살표 스타일 */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: #333;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(255, 255, 255, 0.5); 
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}

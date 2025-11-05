@@ -1,0 +1,121 @@
+/* contact.css */
+
+/* 현재 페이지 메뉴 활성화 스타일 (변경 없음) */
+.main-nav ul li a.active {
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+/* ---------------------------------------------------- */
+/* 1. 카테고리 격자 레이아웃 (텍스트 정렬 및 간격 수정) */
+/* ---------------------------------------------------- */
+.category-grid {
+    display: flex; 
+    justify-content: center; 
+    gap: 80px; 
+    margin: 150px auto 0; 
+    max-width: 1200px;
+    text-align: center; 
+    /* 👈 CRITICAL FIX 1: 항목들이 상단(윗선)부터 정렬되도록 통일 */
+    align-items: flex-start; 
+}
+
+.category-item {
+    width: 200px; 
+    cursor: pointer; 
+    position: relative; 
+    overflow: hidden; 
+    
+    display: flex;
+    flex-direction: column; 
+    
+    /* 👈 CRITICAL FIX 2: 높이 제약 조건을 제거하여 텍스트 정렬 문제 해결 */
+    height: unset; 
+}
+.category-item img {
+    width: 200px; 
+    height: auto;
+    margin-bottom: 40px;
+    display: block;
+    
+    transition: transform 0.3s ease; 
+}
+
+.category-item img:hover {
+    transform: scale(1.05); 
+}
+
+.category-item p {
+    font-size: 16px;
+    line-height: 1.2; 
+    /* 이미지 아래에 바로 붙도록 설정했으나, Flexbox가 높이를 계산하여 동일 선상에 위치시킵니다. */
+    margin-top: 0px; 
+    margin-bottom: 3px; 
+}
+
+.category-item .english {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.2;
+    margin-top: 3px; 
+}
+
+/* ---------------------------------------------------- */
+/* 2. 연락처 정보 스타일 (변경 없음) */
+/* ---------------------------------------------------- */
+.contact-info {
+    position: fixed; 
+    left: 50px;
+    bottom: 180px; 
+    text-align: left;
+    font-size: 16px; 
+    line-height: 1.5;
+    z-index: 20; 
+}
+
+.contact-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px; 
+    padding: 0;
+    margin-bottom: 10px; 
+    font-weight: bold; 
+    text-decoration: none; 
+    z-index: 21; 
+}
+
+/* 숨겨진 연락처 상세 정보 (기본 상태) */
+.details-hidden {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease-out, max-height 0.3s ease-out;
+    pointer-events: none; 
+}
+
+/* 보이는 상태 */
+#contactDetails:not(.details-hidden) { 
+    opacity: 1;
+    max-height: 100px; 
+    pointer-events: auto; 
+    margin-top: 0;
+}
+
+/* ---------------------------------------------------- */
+/* 링크 스타일: 검은색, 좁은 간격 (변경 없음) */
+/* ---------------------------------------------------- */
+.contact-info a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 12px; 
+    line-height: 1.2; 
+    
+    display: block; 
+    margin-bottom: 0px; 
+    margin-right: 0; 
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}

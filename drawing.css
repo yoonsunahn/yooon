@@ -1,0 +1,126 @@
+/* drawing.css 최종 수정 및 통합본 (모달 블러 효과 강화) */
+
+/* ---------------------------------------------------- */
+/* drawing.html 전용 메인 콘텐츠 패딩 설정 */
+/* ---------------------------------------------------- */
+.drawing-content {
+    padding-top: 120px; 
+}
+
+/* 현재 페이지 메뉴 활성화 스타일 */
+.main-nav ul li a.active {
+    text-decoration: underline; 
+    font-weight: bold;
+}
+
+/* ---------------------------------------------------- */
+/* 1. 이미지 갤러리 격자 레이아웃 (4열) */
+/* ---------------------------------------------------- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px; 
+    padding: 50px 50px; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+}
+
+.gallery-item {
+    cursor: pointer; 
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out; 
+}
+
+.gallery-item:hover {
+    transform: scale(1.03); 
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- 2. 이미지 모달(크게 보기 창) 스타일 --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    /* 👈 z-index 값을 더 높게 설정하여 최상단에 확실히 위치시킵니다. */
+    z-index: 9999; 
+    padding-top: 50px; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    
+    /* 👈 약간 더 불투명한 배경을 사용하여 블러가 안 될 때도 대비 */
+    background-color: rgba(255, 255, 255, 0.2); 
+    
+    /* 50px 블러 적용 */
+    backdrop-filter: blur(50px); 
+    -webkit-backdrop-filter: blur(50px); 
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 800px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#caption {
+    margin: 15px auto;
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+    color: #333;
+    font-size: 16px;
+    padding: 10px 0;
+}
+
+/* 닫기 버튼 */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1; 
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 이전/다음 화살표 스타일 */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: #333;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(255, 255, 255, 0.5); 
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}

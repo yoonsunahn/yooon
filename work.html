@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoon sun Ahn - Work</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="work.css">
+</head>
+<body>
+    <header class="main-header">
+        <h1 class="logo">
+            <a href="index.html">Yoon sun Ahn</a>
+        </h1>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="drawing.html">Drawing</a></li>
+                <li><a href="work.html" class="active">Work</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="work-content">
+        <section class="gallery-grid">
+            <div class="gallery-item" onclick="openModal('kaywon.png')"><img src="kaywon.png" alt="Kaywon Project"></div>
+            <div class="gallery-item" onclick="openModal('mungu.png')"><img src="mungu.png" alt="Work 2 Title"></div>
+            <div class="gallery-item" onclick="openModal('haruki.png')"><img src="haruki.png" alt="Work 3 Title"></div>
+            <div class="gallery-item" onclick="openModal('letter.jpg')"><img src="letter.jpg" alt="Work 4 Title"></div>
+            </section>
+    </main>
+
+    <div id="imageModal" class="modal" onclick="closeModal(event)">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        
+        <div id="imageInfo" class="modal-info">
+            <p id="modalTitle">이미지 제목 (JavaScript가 여기에 내용을 넣습니다)</p>
+        </div>
+        
+    </div>
+
+    <img src="think.png" alt="왼쪽 하단 드로잉" class="small-drawing">
+
+    <script src="gallery.js"></script>
+</body>
+</html>

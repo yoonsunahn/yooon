@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoon sun Ahn - Contact</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="contact.css"> 
+</head>
+<body>
+    <header class="main-header">
+        <h1 class="logo">
+            <a href="index.html">Yoon sun Ahn</a>
+        </h1>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="drawing.html">Drawing</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contact-page-content">
+        <section class="category-grid">
+            
+            <div class="category-item">
+                <img src="illust.png" alt="일러스트레이션 아이콘">
+                <p>일러스트레이션</p>
+                <p class="english">Illustration</p>
+            </div>
+
+            <div class="category-item">
+                <img src="drawing.png" alt="드로잉 아이콘">
+                <p>드로잉</p>
+                <p class="english">Drawing</p>
+            </div>
+
+            <div class="category-item">
+                <img src="edit.png" alt="편집디자인 아이콘">
+                <p>편집디자인</p>
+                <p class="english">Editorial Design</p>
+            </div>
+
+            <div class="category-item">
+                <img src="books.png" alt="북디자인 아이콘">
+                <p>북디자인</p>
+                <p class="english">Book design</p>
+            </div>
+            
+        </section>
+
+        <section class="contact-info">
+            <button class="contact-toggle" onclick="toggleContactDetails()">
+                Contact me!
+            </button>
+            
+            <div id="contactDetails" class="details-hidden">
+                <a href="mailto:ccool95@naver.com">ccool95@naver.com</a>
+                
+                <a href="https://www.instagram.com/y_0on_/" target="_blank">@y_0on_</a>
+            </div>
+        </section>
+    </main>
+    
+    <img src="looking.png" alt="왼쪽 하단 드로잉" class="small-drawing">
+
+    <script>
+        function toggleContactDetails() {
+            const details = document.getElementById('contactDetails');
+            details.classList.toggle('details-hidden'); 
+        }
+    </script>
+</body>
+</html>
