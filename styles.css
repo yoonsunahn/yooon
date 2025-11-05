@@ -1,1981 +1,349 @@
- *{
-    box-sizing: border-box;
+/* style.css 최종 안정화 및 조정본 (스크롤바, 반응형, 스크롤 축소 기능 통합) */
+
+/* ---------------------------------------------------- */
+/* 1. 웹사이트 전체의 기본 서체 및 너비 리셋 */
+/* ---------------------------------------------------- */
+html, body { 
+    width: 100%;
+    /* 스크롤바 표시를 위해 height 설정을 제거 */
+    height: unset; 
+    /* 스크롤바 숨김 설정을 제거하고 기본 동작으로 되돌림 */
+    overflow-y: unset; 
 }
-
-html, body {
-
-    margin: 0;
-    padding: 0;
-    overflow-y:hidden
-}
-
 body {
-    background-image:url('desk3.png');
-    background-size: 100%;
+    font-family: 'system-ui', sans-serif; 
+    font-weight: 400; 
+    color: #333; 
+    line-height: 1.6;
     margin: 0;
     padding: 0;
-    font-family: 'AppleMyungjo';
-    }
+    box-sizing: border-box;
+    /* 수평 스크롤은 발생하지 않도록 유지 */
+    overflow-x: unset; 
+}
 
-    img {width: 100%;}
+/* ---------------------------------------------------- */
+/* 2. 상단 헤더 스타일 (고정 및 좌/우/상 여백 50px 통일) */
+/* ---------------------------------------------------- */
+.main-header {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    background-color: #fff; 
+    width: 100%; 
+    z-index: 50; 
+    
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    
+    margin: 0; 
+    padding: 20px 50px 10px 50px; 
+    box-sizing: border-box; 
+    
+    /* 🌟 스크롤 축소 기능을 위한 CSS 추가 */
+    transition: padding 0.3s ease, height 0.3s ease, box-shadow 0.3s ease;
+}
 
-    a{
+/* 2-A. 스크롤 시 헤더 축소 스타일 (JavaScript 필요) */
+.main-header.shrink {
+    /* 스크롤 시 패딩을 줄여 헤더의 높이를 낮춥니다. */
+    padding-top: 10px; 
+    padding-bottom: 5px;
+    /* 시각적인 구분을 위해 그림자 추가 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.main-header.shrink .logo a {
+    /* 로고 크기를 조금 줄입니다. */
+    font-size: 18px;
+}
+
+.main-header .logo a {
+    color: inherit; 
+    text-decoration: none; 
+    cursor: pointer; 
+    font-size: 20px; 
+    font-weight: 500; 
+    /* 로고 크기 변경도 부드럽게 */
+    transition: font-size 0.3s ease;
+}
+
+/* ---------------------------------------------------- */
+/* 3. 내비게이션 메뉴 스타일 */
+/* ---------------------------------------------------- */
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.main-nav ul li {
+    margin-left: 40px;
+}
+.main-nav a {
+    color: #333;
     text-decoration: none;
-    font-family: 'KCC임권택체';
-    color:rgb(0, 0, 0)
-    }
-    
-    a:hover {color:#ff0000;}
-    
-
-    #warp {
-        width: 1200px;
-        height: 400px;
-        margin: 0 auto;
-    }
-    
-    .time {
-        margin-left: 660px;
-        margin-top:5px;
-        font-size: 20px;
-    }
-
-    .molla {
-        display: none;
-        position: fixed;
-        z-index: 2;
-        height: 200%;
-        width: auto;
-        /* 퍼센트로 잡을 때 계산하는 방법 */
-        left: calc(50% - 24px);
-        top: 50%;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        /*포인터이벤트는 마우스 올리지 않았을때 아무것도 일어나지 않는것 */
-    }
-
-    .time:hover .molla {display: block;}
-
-    .container p {
-    position: fixed;    
-    }
-
-    .bt1 {
-    animation: bt1 2s infinite;
-    animation-delay: 1s;
-    left: 5%;
-    top: 1%;
+    font-size: 16px;
+    font-weight: 400; 
+    letter-spacing: 0.1em;
+    padding-bottom: 2px;
+    transition: color 0.2s ease; 
+}
+.main-nav a:hover {
+    color: #AAAAAA; 
+    text-decoration: underline; 
+}
+.main-nav a.active {
+    color: #AAAAAA; 
+    text-decoration: underline;
+    font-weight: 700; 
 }
 
-@keyframes bt1 {
-    30% {font-size: 15px;}
-    25% {color: rgb(140, 140, 140);}
-    30% {color: rgb(0, 255, 38);}
-    50% {color: #ff1fdd;}
-}
-    
-
-.bt2{
-    animation: bt2 3s infinite;
-    left: 50%;
-    top: 25%;
-}
-
-@keyframes bt2 {
-    30% {font-size: 20px;}
-    25% {color: rgb(8, 0, 255);}
-    30% {color: rgb(0, 255, 42);}
-    50% {color: #ff00d4;}
+/* ---------------------------------------------------- */
+/* 4. 공통: 왼쪽 하단 드로잉 이미지 스타일 */
+/* ---------------------------------------------------- */
+.small-drawing {
+    position: fixed; 
+    left: 50px; 
+    bottom: 50px; 
+    width: 80px; 
+    height: auto;
+    z-index: 1000; 
+    cursor: pointer; 
 }
 
-.bt3{
-    animation: bt3 2.5s infinite;
-    left: 50%;
-    top: 60%;
+/* ---------------------------------------------------- */
+/* 5. 갤러리 섹션 (Drawings/Works 페이지) 스타일 (3열 배치, 크기 확대, 호버 효과) */
+/* ---------------------------------------------------- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; 
+    max-width: 1400px;
+    margin: 80px auto;
+    padding: 0 50px;
+}
+.gallery-item {
+    cursor: pointer;
+    overflow: hidden;
+    background-color: transparent !important; 
+    box-shadow: none !important; 
+    border: none !important; 
+}
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease, opacity 0.3s ease; 
+    box-shadow: none !important;
+    border: none !important;
+    opacity: 1; 
+}
+.gallery-item img:hover {
+    transform: scale(1.03);
+    opacity: 0.7; 
 }
 
-@keyframes bt3 {
-    30% {font-size: 20px;}
-    25% {color: rgb(120, 120, 120);}
-    30% {color: rgb(0, 13, 255);}
-    50% {color: #ff00d4;}
-}
-
-.bt4{
-    animation: bt4 3s infinite;
-    animation-delay: 2s;
-    left: 90%;
-    top: 70%;
-}
-
- @keyframes bt4 {
-    30% {font-size: 20px;}
-    25% {color: rgb(0, 174, 255);}
-    30% {color: rgb(255, 98, 0);}
-    50% {color: #1eff00;}
-}
-
-.bt5{
-    animation: bt5 2.5s infinite;
-    left: 47%;
-    top: 35%;
-}
-
-@keyframes bt5 {
-    30% {font-size: 18px;}
-    25% {color: rgb(176, 176, 176);}
-    30% {color: rgb(0, 251, 142);}
-    50% {color: #ff00d4;}
-    }
-
-.bt6{
-    animation: bt6 3s infinite;
-    left: 70%;
-    top: 92%;
-}
-
-@keyframes bt6 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 108, 238);}
-    30% {color: rgb(16, 0, 135);}
-    50% {color: #ffee00;}
-    }
-
-.bt7{
-    animation: bt7 2.5s infinite;
-    left: 45%;
-    top: 80%;
-}
-
-@keyframes bt7 {
-    30% {font-size: 25px;}
-    25% {color: rgb(173, 173, 173);}
-    30% {color: rgb(36, 66, 255);}
-    50% {color: #3cff00;}
-    }
-
-.bt8{
-    animation: bt8 3s infinite;
-    left: 15%;
-    top: 60%;
-    }
-
-@keyframes bt8 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 186, 245);}
-    0% {color: rgb(255, 157, 10);}
-    50% {color: #3cff00;}
-        }
-
-.bt9{
-    animation: bt9 3s infinite;
-    left: 38%;
-    top: 28%;
-    }
-
-    @keyframes bt9 {
-        30% {font-size: 20px;}
-        25% {color: rgb(164, 199, 255);}
-        30% {color: rgb(17, 255, 0);}
-        50% {color: #ff6f00;}
-        }
-
-.bt10{
-        animation: bt10 2s infinite;
-        left: 35%;
-        top: 20%;
-    }
-        
-@keyframes bt10 {
-        30% {font-size: 20px;}
-        25% {color: rgb(255, 187, 187);}
-        30% {color: rgb(0, 149, 255);}
-        50% {color: #ff6f00;}
-        }
-
- .bt11{
-        animation: bt11 3s infinite;
-        left: 62%;
-        top: 40%;
-    }
-        
-@keyframes bt11 {
-        30% {font-size: 18px;}
-        25% {color: rgb(166, 209, 255);}
-        30% {color: rgb(255, 128, 0);}
-        50% {color: #f200ff;}
-        }
-
-.bt12{
-    animation: bt12 2s infinite;
-    left: 33%;
-    top: 45%;
-}
-    
-@keyframes bt12 {
-    30% {font-size: 15px;}
-    25% {color: rgb(173, 173, 173);}
-    30% {color: rgb(255, 61, 184);}
-    50% {color: #00a2ff;}
-    }
-
-.bt13{
-    animation: bt13 2.5s infinite;
-    left: 70%;
-    top: 45%;
-}
-    
-@keyframes bt13 {
-    30% {font-size: 22px;}
-    25% {color: rgb(255, 115, 0);}
-    30% {color: rgb(255, 61, 184);}
-    50% {color: #005eff;}
-    }
-
-.bt14{
-    animation: bt14 2.5s infinite;
-    left: 70%;
-    top: 10%;
-}
-    
-@keyframes bt14 {
-    30% {font-size: 20px;}
-    25% {color: rgb(0, 251, 255);}
-    30% {color: rgb(255, 135, 61);}
-    50% {color: #0037ff;}
-    }
-
-.bt15{
-    animation: bt15 2s infinite;
-    left: 10%;
-    top: 22%;
-}
-            
-@keyframes bt15 {
-    30% {font-size: 20px;}
-    25% {color: rgb(173, 173, 173);}
-    30% {color: rgb(255, 135, 61);}
-    50% {color: #0084ff;}
-    }
-
-.bt16{
-    
-    animation: bt16 2.5s infinite;
-    left: 3%;
-    top: 12%;
-    }
-                
-@keyframes bt16 {
-    30% {font-size: 20px;}
-    25% {color: rgb(255, 127, 240);}
-    30% {color: rgb(255, 135, 61);}
-    50% {color: #0084ff;}
-    }
-
-.bt17{
-    animation: bt17 2.5s infinite;
-    left: 40%;
-    top: 12%;
-    }
-                    
-@keyframes bt17 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 208, 0);}
-    30% {color: rgb(61, 255, 155);}
-    50% {color: #0084ff;}
-    }
-
-.bt18{
-    animation: bt18 2s infinite;
-    left: 68%;
-    top: 20%;
-    }
-                        
-@keyframes bt18 {
-    30% {font-size: 18px;}
-    25% {color: rgb(232, 70, 0);}
-    30% {color: rgb(61, 164, 255);}
-    50% {color: #0011ff;}
-    }
-
-.bt19{
-    animation: bt19 3s infinite;
-    left: 20%;
-    top: 39%;
-    }
-                            
-@keyframes bt19 {
-    30% {font-size: 20px;}
-    25% {color: rgb(173, 173, 173);}
-    30% {color: rgb(255, 135, 61);}
-    50% {color: #0084ff;}
-    }
-
-.bt20{
-    animation: bt20 3s infinite;
-    left: 13%;
-    top: 75%;
-    }
-                                
-@keyframes bt20 {
-    30% {font-size: 20px;}
-    25% {color: rgb(255, 174, 0);}
-    30% {color: rgb(255, 98, 0);}
-    50% {color: #0084ff;}
-    }
-
-.bt21{
-    animation: bt21 2.5s infinite;
-    left: 80%;
-    top: 25%;
-    }
-                            
-@keyframes bt21 {
-    30% {font-size: 20px;}
-    25% {color: rgb(82, 255, 82);}
-    30% {color: rgb(255, 135, 61);}
-    50% {color: #ff0400;}
-    }
-
-.bt22{
-    animation: bt22 2.5s infinite;
-    left: 80%;
-    top: 65%;
-    }
-                                
-@keyframes bt22 {
-    30% {font-size: 20px;}
-    25% {color: rgb(0, 60, 255);}
-    30% {color: rgb(255, 135, 61);}
-    50% {color: #0084ff;}
-    }
-
-.bt23{
-    animation: bt23 3s infinite;
-    left: 65%;
-    top: 55%;
-    }
-                                    
-@keyframes bt23 {
-    30% {font-size: 18px;}
-    25% {color: rgb(50, 152, 255);}
-    30% {color: rgb(0, 72, 255);}
-    50% {color: #ff00dd;}
-    }
-
-.bt24{
-    animation: bt24 2.5s infinite;
-    left: 40%;
-    top: 50%;
-    }
-                                        
-@keyframes bt24 {
-    30% {font-size: 20px;}
-    25% {color: rgb(255, 115, 0);}
-    30% {color: rgb(61, 229, 255);}
-    50% {color: #00ff1a;}
-    }
-
-.bt25{
-    animation: bt25 2.5s infinite;
-    left: 45%;
-    top: 42%;
-    }
-                                            
-@keyframes bt25 {
-    30% {font-size: 20px;}
-    25% {color: rgb(115, 255, 148);}
-    30% {color: rgb(61, 229, 255);}
-    50% {color: #0084ff;}
-    }
-
-.bt26{
-    animation: bt26 2.5s infinite;
-    left: 35%;
-    top: 35%;
-    }
-                                                
-@keyframes bt26 {
-    30% {font-size: 20px;}
-    25% {color: rgb(255, 115, 0);}
-    30% {color: rgb(255, 1, 247);}
-    50% {color: #0084ff;}
-    }
-
-.bt27{
-    animation: bt27 3s infinite;
-    left: 60%;
-    top: 30%;
-    }
-                                                    
-@keyframes bt27 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 115, 0);}
-    30% {color: rgb(61, 229, 255);}
-    50% {color: #0084ff;}
-        }
-        
-.bt28{
-    animation: bt28 2s infinite;
-    left: 85%;
-    top: 75%;
-    }
-                                                            
-@keyframes bt28 {
-    30% {font-size: 22px;}
-    25% {color: rgb(0, 255, 174);}
-    30% {color: rgb(255, 132, 61);}
-    50% {color: #ff0d00;}
-    }
-
-.bt29{
-    animation: bt29 1s infinite;
-    left: 50%;
-    top: 75%;
-    }
-                                                                
- @keyframes bt29 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 115, 0);}
-    30% {color: rgb(61, 229, 255);}
-    50% {color: #0084ff;}
-    }
-
-.bt30{
-    animation: bt30 1s infinite;
-    left: 5%;
-    top: 55%;
-    }
-                                                                    
-@keyframes bt30 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 115, 0);}
-    30% {color: rgb(61, 229, 255);}
-    50% {color: #0084ff;}
-    }
-
-.bt31{
-    animation: bt31 2s infinite;
-    left: 18%;
-    top: 12%;
-        }
-                                                                        
-@keyframes bt31 {
-    30% {font-size: 20px;}
-    25% {color: rgb(255, 115, 0);}
-    30% {color: rgb(61, 229, 255);}
-    50% {color: #0084ff;}
-    }
-
-.bt32{
-    animation: bt32 2.5s infinite;
-    left: 10%;
-    top: 90%;
-    }
-                                                                            
-@keyframes bt32 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 115, 0);}
-    30% {color: rgb(61, 229, 255);}
-    50% {color: #ff1500;}
-    }
-
-.bt33{
-    animation: bt33 3s infinite;
-    left: 3%;
-    top: 80%;
-    }
-                                                                                
-@keyframes bt33 {
-    30% {font-size: 20px;}
-    25% {color: rgb(255, 115, 0);}
-    30% {color: rgb(61, 229, 255);}
-    50% {color: #0084ff;}
-    }
-
-.bt34{
-    animation: bt34 2s infinite;
-    left: 82%;
-    top: 85%;
-    }
-                                                                                    
-@keyframes bt34 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 13, 0);}
-    30% {color: rgb(61, 229, 255);}
-    50% {color: #0084ff;}
-    }
-
-.bt35{
-    animation: bt35 2.5s infinite;
-    left: 85%;
-    top: 90%;
-    }
-                                                                                        
-@keyframes bt35 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 225);}
-    30% {color: rgb(61, 255, 206);}
-    50% {color: #000a92;}
-    }
-
-.bt36{
-    animation: bt36 1.5s infinite;
-    left: 18%;
-    top: 28%;
-    }
-                                                                                            
-@keyframes bt36 {
-    30% {font-size: 20px;}
-    25% {color: rgb(255, 0, 234);}
-    30% {color: rgb(61, 255, 64);}
-    50% {color: #ff4d00;}
-    }
-
-.bt37{
-    animation: bt37 2s infinite;
-    left: 73%;
-    top: 70%;
-    }
-                                                                                                
-@keyframes bt37 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 234);}
-    30% {color: rgb(61, 255, 64);}
-    50% {color: #ff4d00;}
-    }
-    
-.bt38{
-    animation: bt38 2s infinite;
-    left: 85%;
-    top: 18%;
-    }
-                                                                                                    
-@keyframes bt38 {
-    30% {font-size: 22px;}
-    25% {color: rgb(255, 136, 0);}
-    30% {color: rgb(61, 129, 255);}
-    50% {color: #ff00f7;}
-    }
-
-.bt39{
-    animation: bt39 1.5s infinite;
-    left: 29%;
-    top: 86%;
-    }
-                                                                                                        
-@keyframes bt39 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 0);}
-    30% {color: rgb(61, 129, 255);}
-    50% {color: #ff00f7;}
-    }
-
-.bt40{
-    animation: bt40 1.5s infinite;
-    left: 60%;
-    top: 82%;
-    }
-                                                                                                                
-@keyframes bt40 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 136, 0);}
-    30% {color: rgb(61, 129, 255);}
-    50% {color: #ff00f7;}
-    }
-
-.bt41{
-    animation: bt41 2s infinite;
-    left: 42%;
-    top: 67%;
-    }
-                                                                                                                    
-@keyframes bt41 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 136, 0);}
-    30% {color: rgb(61, 129, 255);}
-    50% {color: #ff00f7;}
-    }
-
-.bt42{
-    animation: bt42 1.5s infinite;
-    left: 13%;
-    top: 49%;
-    }
-                                                                                                                        
-@keyframes bt42 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 136, 0);}
-    30% {color: rgb(61, 129, 255);}
-    50% {color: #ff0000;}
-    }
-
-.bt43{
-    animation: bt43 2s infinite;
-    left: 23%;
-    top: 80%;
-    }
-                                                                                                                            
-@keyframes bt43 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 136, 0);}
-    30% {color: rgb(61, 129, 255);}
-    50% {color: #ff00f7;}
-    }
-
-.bt44{
-    animation: bt44 2s infinite;
-    left: 43%;
-    top: 46%;
-    }
-                                                                                                                                
-@keyframes bt44 {
-    30% {font-size: 20px;}
-    25% {color: rgb(255, 213, 0);}
-    30% {color: rgb(61, 129, 255);}
-    50% {color: #ff00f7;}
-    }
-
-.bt45{
-    animation: bt45 2s infinite;
-    left: 56%;
-    top: 46%;
-    }
-                                                                                                                                    
-@keyframes bt45 {
-    30% {font-size: 20px;}
-    25% {color: rgb(255, 102, 0);}
-    30% {color: rgb(0, 89, 255);}
-    50% {color: #00ff51;}
-    }
-
-.bt46{
-    animation: bt46 2s infinite;
-    left: 57%;
-    top: 36%;
-    }
-                                                                                                                                        
-@keyframes bt46 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 0);}
-    30% {color: rgb(0, 89, 255);}
-    50% {color: #00ff51;}
-    }
-
-.bt47{
-    animation: bt47 2.5s infinite;
-    left: 25%;
-    top: 33%;
-    }
-                                                                                                                                            
-@keyframes bt47 {
-    30% {font-size: 20px;}
-    25% {color: rgb(234, 0, 255);}
-    30% {color: rgb(0, 157, 255);}
-    50% {color: #ff9900;}
-    }
-
-.bt48{
-    animation: bt48 2s infinite;
-    left: 20%;
-    top: 43%;
-    }
-                                                                                                                                                
-@keyframes bt48 {
-    30% {font-size: 20px;}
-    25% {color: rgb(234, 0, 255);}
-    30% {color: rgb(0, 157, 255);}
-    50% {color: #ff9900;}
-    }
-    
-.bt49{
-    animation: bt49 2s infinite;
-    left: 31%;
-    top: 50%;
-    }
-                                                                                                                                                    
-@keyframes bt49 {
-    30% {font-size: 22px;}
-    25% {color: rgb(255, 55, 0);}
-    30% {color: rgb(0, 255, 170);}
-    50% {color: #0066ff;}
-    }
-
-.bt50{
-    animation: bt50 2s infinite;
-    left: 19%;
-    top: 55%;
-    }
-                                                                                                                                                        
-@keyframes bt50 {
-    30% {font-size: 22px;}
-    25% {color: rgb(255, 55, 0);}
-    30% {color: rgb(0, 255, 170);}
-    50% {color: #0066ff;}
-    }
-
-.bt51{
-    animation: bt51 2s infinite;
-    left: 56%;
-    top: 55%;
-    }
-                                                                                                                                                            
-@keyframes bt51 {
-    30% {font-size: 20px;}
-    25% {color: rgb(255, 55, 0);}
-    30% {color: rgb(0, 255, 170);}
-    50% {color: #0066ff;}
-    }
-
-.bt52{
-    animation: bt52 2.5s infinite;
-    left: 26%;
-    top: 16%;
-    }
-                                                                                                                                                                
-@keyframes bt52 {
-    30% {font-size: 20px;}
-    25% {color: rgb(0, 255, 17);}
-    30% {color: rgb(0, 242, 255);}
-    50% {color: #0066ff;}
-    }
-
-.bt53{
-    animation: bt53 2.5s infinite;
-    left: 25%;
-    top: 8%;
-    }
-                                                                                                                                                                    
-@keyframes bt53 {
-    30% {font-size: 20px;}
-    25% {color: rgb(0, 255, 17);}
-    30% {color: rgb(251, 132, 255);}
-    50% {color: #0066ff;}
-    }
-
-.bt54{
-    animation: bt54 1.5s infinite;
-    left: 24%;
-    top: 22%;
-    }
-                                                                                                                                                                        
-@keyframes bt54 {
-    30% {font-size: 19px;}
-    25% {color: rgb(0, 255, 17);}
-    30% {color: rgb(251, 132, 255);}
-    50% {color: #0066ff;}
-    }
-
-.bt55{
-    animation: bt55 1.5s infinite;
-    left: 64%;
-    top: 62%;
-    }
-                                                                                                                                                                            
-@keyframes bt55 {
-        30% {font-size: 19px;}
-        25% {color: rgb(0, 255, 17);}
-        30% {color: rgb(251, 132, 255);}
-        50% {color: #0066ff;}
-        }
-
-.bt56{
-    animation: bt56 2s infinite;
-    left: 58%;
-    top: 66%;
-    }
-                                                                                                                                                                                    
-@keyframes bt56 {
-    30% {font-size: 19px;}
-    25% {color: rgb(255, 111, 0);}
-    30% {color: rgb(251, 132, 255);}
-    50% {color: #0066ff;}
-    }
-
-.bt57{
-    animation: bt57 2s infinite;
-    left: 40%;
-    top: 86%;
-    }
-                                                                                                                                                                                        
-@keyframes bt57 {
-    30% {font-size: 19px;}
-    25% {color: rgb(255, 111, 0);}
-    30% {color: rgb(251, 132, 255);}
-    50% {color: #0066ff;}
-    }
-
-.bt58{
-    animation: bt58 2s infinite;
-    left: 45%;
-    top: 20%;
-    }
-                                                                                                                                                                                            
-@keyframes bt58 {
-    30% {font-size: 19px;}
-    25% {color: rgb(255, 111, 0);}
-    30% {color: rgb(251, 132, 255);}
-    50% {color: #0066ff;}
-    }
-
-.bt59{
-    animation: bt59 2s infinite;
-    left: 46%;
-    top: 7%;
-    }
-                                                                                                                                                                                                
-@keyframes bt59 {
-    30% {font-size: 19px;}
-    25% {color: rgb(255, 0, 0);}
-    30% {color: rgb(251, 132, 255);}
-    50% {color: #0066ff;}
-    }
-
-.bt60{
-    animation: bt60 2s infinite;
-    left: 46%;
-    top: 31%;
-    }
-                                                                                                                                                                                                    
-@keyframes bt60 {
-    30% {font-size: 19px;}
-    25% {color: rgb(255, 111, 0);}
-    30% {color: rgb(251, 132, 255);}
-    50% {color: #0066ff;}
-    }
-
-.bt61{
-    animation: bt61 2s infinite;
-    left: 2%;
-    top: 17%;
-    }
-                                                                                                                                                                                                        
-@keyframes bt61 {
-    30% {font-size: 20px;}
-    25% {color: rgb(255, 111, 0);}
-    30% {color: rgb(251, 132, 255);}
-    50% {color: #0066ff;}
-    }
-
-.bt62{
-    animation: bt62 2s infinite;
-    left: 2%;
-    top: 7%;
-    }
-                                                                                                                                                                                                            
- @keyframes bt62 {
-    30% {font-size: 19px;}
-    25% {color: rgb(255, 111, 0);}
-    30% {color: rgb(251, 132, 255);}
-    50% {color: #0066ff;}
-    }
-
-.bt63{
-    animation: bt63 2s infinite;
-    left: 2%;
-    top: 60%;
-    }
-                                                                                                                                                                                                                
-@keyframes bt63 {
-    30% {font-size: 22px;}
-    25% {color: rgb(255, 111, 0);}
-    30% {color: rgb(251, 132, 255);}
-    50% {color: #0066ff;}
-    }
-
-.bt64{
-    animation: bt64 2.5s infinite;
-    left: 2%;
-    top: 90%;
-    }
-                                                                                                                                                                                                                    
-@keyframes bt64 {
-    30% {font-size: 20px;}
-    25% {color: rgb(0, 140, 255);}
-    30% {color: rgb(247, 0, 255);}
-    50% {color: #ffee00;}
-    }
-
-.bt65{
-    animation: bt65 2s infinite;
-    left: 4%;
-    top: 85%;
-    }
-                                                                                                                                                                                                                        
-@keyframes bt65 {
-    30% {font-size: 19px;}
-    25% {color: rgb(255, 111, 0);}
-    30% {color: rgb(251, 132, 255);}
-    50% {color: #0066ff;}
-    }
-
-.bt66{
-    animation: bt66 2.5s infinite;
-    left: 10%;
-    top: 71%;
-    }
-                                                                                                                                                                                                                            
-@keyframes bt66 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 230, 0);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #ffb700;}
-    }
-
-.bt67{
-    animation: bt67 1.5s infinite;
-    left: 10%;
-    top: 40%;
-    }
-                                                                                                                                                                                                                                
-@keyframes bt67 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 230, 0);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #ff0000;}
-    }
-
-.bt68{
-    animation: bt68 2s infinite;
-    left: 10%;
-    top: 35%;
-    }
-                                                                                                                                                                                                                                    
-@keyframes bt68 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 191);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #00a6ff;}
-    }
-
-.bt69{
-    animation: bt69 2s infinite;
-    left: 20%;
-    top: 70%;
-    }
-                                                                                                                                                                                                                                        
-@keyframes bt69 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 191);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #00a6ff;}
-    }
-
-.bt70{
-    animation: bt70 2.5s infinite;
-    left: 54%;
-    top: 85%;
-    }
-                                                                                                                                                                                                                                            
-@keyframes bt70 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 191);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #00a6ff;}
-    }
-
-.bt71{
-    animation: bt71 2s infinite;
-    left: 12%;
-    top: 1%;
-    }
-                                                                                                                                                                                                                                                
-@keyframes bt71 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 191);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #00a6ff;}
-    }
-
-.bt72{
-    animation: bt72 2.5s infinite;
-    left: 12%;
-    top: 9%;
-    }
-                                                                                                                                                                                                                                                    
- @keyframes bt72 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 191);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #00a6ff;}
-    }
-
-.bt73{
-    animation: bt73 1s infinite;
-    left: 37%;
-    top: 63%;
-    }
-                                                                                                                                                                                                                                                        
-@keyframes bt73 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 191);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #00a6ff;}
-    }
-
-.bt74{
-    animation: bt74 1.5s infinite;
-    left: 37%;
-    top: 3%;
-    }
-                                                                                                                                                                                                                                                            
-@keyframes bt74 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 191);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #00a6ff;}
-    }
-
-.bt75{
-    animation: bt75 1.5s infinite;
-    left: 79%;
-    top: 30%;
-    }
-                                                                                                                                                                                                                                                            
-@keyframes bt75 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 0);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #00a6ff;}
-    }
-
-.bt76{
-    animation: bt76 25s infinite;
-    left: 70%;
-    top: 85%;
-    }
-                                                                                                                                                                                                                                                                
-@keyframes bt76 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 191);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #00a6ff;}
-    }
-
-.bt77{
-    animation: bt77 1.5s infinite;
-    left: 87%;
-    top: 50%;
-    }
-                                                                                                                                                                                                                                                                    
-@keyframes bt77 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 191);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #00a6ff;}
-    }
-
-.bt78{
-    animation: bt78 2.5s infinite;
-    left: 90%;
-    top: 26%;
-    }
-                                                                                                                                                                                                                                                                        
-@keyframes bt78 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 191);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #00a6ff;}
-    }
-
-.bt79{
-    animation: bt79 2s infinite;
-    left: 92%;
-    top: 6%;
-    }
-                                                                                                                                                                                                                                                                            
-@keyframes bt79 {
-    30% {font-size: 18px;}
-    25% {color: rgb(255, 0, 191);}
-    30% {color: rgb(140, 255, 132);}
-    50% {color: #00a6ff;}
-    }
-    
-.bt80{
-    animation: bt80 1.5s infinite;
-    left: 90%;
-    top: 46%;
-    }
-                                                                                                                                                                                                                                                                                
-@keyframes bt80 {
-    30% {font-size: 20px;}
-    25% {color: rgb(255, 204, 0);}
-    30% {color: rgb(255, 111, 0);}
-    50% {color: #00a6ff;}
-    }
-    
-.ch1 {
-    animation: ct1 3s infinite;
-    left: 83%;
-    top: 5%;
-    }
-
-@keyframes ct1 {
-    30% {font-size: 10px;}
-    25% {color: rgb(172, 172, 172);}
-    50% {color: rgb(13, 255, 0);}
-    75% {color: #112596;}
-    }
-
-.ch2 {
-    color: #fff;
-    animation: ct2 2.5s infinite;
-    left: 82%;
-    top: 12%;
-    }
-    
-@keyframes ct2 {
-    30% {font-size: 15px;}
-    25% {color: rgb(187, 187, 187);}
-    50% {color: rgb(0, 89, 198);}
-    75% {color: #14ff95;}
-    }
-
-.ch3 {
-    color: #fff;
-    animation: ct3 2s infinite;
-    left: 72%;
-    top: 60%;
-    }
-    
-@keyframes ct3 {
-    30% {font-size: 15px;}
-    25% {color: rgb(165, 165, 165);}
-    50% {color: rgb(0, 255, 85);}
-    75% {color: rgb(255, 106, 0)}
-    }
-
-.ch4 {
-    color: #fff;
-    animation: ct4 3s infinite;
-    left: 52%;
-    top: 90%;
-    }
-    
-@keyframes ct4 {
-    25% {color: rgb(153, 153, 153);}
-    50% {color: rgb(255, 0, 251);}
-    75% {color: rgb(255, 173, 30);}
-    }
-
-.ch5 {
-    color: #fff;
-    animation: ct5 2s infinite;
-    left: 35%;
-    top: 93%;
-    }
-    
-@keyframes ct5 {
-    25% {color: rgb(166, 166, 166);}
-    50% {color: rgb(0, 181, 247);}
-    75% {color: #ff1ef8;}
-    }
-
-.ch6 {
-    color: #fff;
-    animation: ct6 2s infinite;
-    left: 30%;
-    top: 59%;
-    }
-    
-@keyframes ct6 {
-    25% {color: rgb(196, 196, 196);}
-    50% {color: rgb(241, 112, 0);}
-    75% {color: #0800ff;}
-    }
-
-.ch7 {
-    color: #fff;
-    animation: ct7 1.5s infinite;
-    left: 22%;
-    top: 50%;
-    }
-   
- @keyframes ct7 {
-    25% {color: rgb(196, 196, 196);}
-    50% {color: rgb(0, 199, 126);}
-    75% {color: #ff0000;}
-    }
-
-.ch8 {
-    color: #fff;
-    animation: ct8 2.5s infinite;
-    left: 5%;
-    top: 30%;
-    }
-        
-@keyframes ct8 {
-    25% {color: rgb(196, 196, 196);}
-    50% {color: rgb(0, 199, 126);}
-    75% {color: #ff5e00;}
-    }
-
-.ch9 {
-    color: #fff;
-    animation: ct9 2s infinite;
-    left: 10%;
-    top: 5%;
-        }
-            
-@keyframes ct9 {
-    25% {color: rgb(196, 196, 196);}
-    50% {color: rgb(0, 199, 126);}
-    75% {color: #ff5e00;}
-    }
-
-.ch10 {
-        color: #fff;
-        animation: ct10 2.5s infinite;
-        left: 33%;
-        top: 7%;
-        }
-                    
-@keyframes ct10 {
-    25% {color: rgb(255, 132, 0);}
-    50% {color: rgb(0, 83, 199);}
-    75% {color: #ff00fb;}
-    }
-    
-.ch11 {
-        color: #fff;
-        animation: ct11 1.5s infinite;
-        left: 50%;
-        top: 10%;
-        }
-                    
-@keyframes ct11 {
-    25% {color: rgb(196, 196, 196);}
-    50% {color: rgb(0, 199, 126);}
-    5% {color: #ff5e00;}
-    }
-
-.ch12 {
-    color: #fff;
-    animation: ct12 1s infinite;
-    left: 82%;
-    top: 42%;
-    }
-                    
-@keyframes ct12 {
-    25% {color: rgb(196, 196, 196);}
-    50% {color: rgb(0, 199, 126);}
-    5% {color: #ff5e00;}
-    }
-
-.ch13 {
-    color: #fff;
-    animation: ct13 3s infinite;
-    left: 75%;
-    top: 50%;
-    }
-                        
-@keyframes ct13 {
-    25% {color: rgb(196, 196, 196);}
-    50% {color: rgb(0, 199, 126);}
-    5% {color: #ff5e00;}
-    }
-
-.ch14 {
-        color: #fff;
-        animation: ct14 1s infinite;
-        left: 75%;
-        top: 80%;
-        }
-                            
-@keyframes ct14 {
-    25% {color: rgb(196, 196, 196);}
-    50% {color: rgb(0, 199, 126);}
-    5% {color: #ff5e00;}
-    }
-
-.ch15 {
-    color: #fff;
-    animation: ct15 2s infinite;
-    left: 65%;
-    top: 75%;
-        }
-                            
-@keyframes ct15 {
-    25% {color: rgb(196, 196, 196);}
-    50% {color: rgb(0, 199, 126);}
-    5% {color: #ff5e00;}
-    }
-
-.ch16 {
-    color: #fff;
-    animation: ct16 2s infinite;
-    left: 35%;
-    top: 78%;
-            }
-                                
-    @keyframes ct16 {
-        25% {color: rgb(0, 188, 245);}
-        50% {color: rgb(0, 199, 126);}
-        5% {color: #ff5e00;}
-        }
-
- .ch17 {
-    color: #fff;
-    animation: ct17 2s infinite;
-    left: 15%;
-    top: 85%;
-    }
-                                        
-@keyframes ct17 {
-    25% {color: rgb(196, 196, 196);}
-    50% {color: rgb(0, 96, 199);}
-    5% {color: #ff5e00;}
-    }
-
-.ch18 {
-    color: #fff;
-    animation: ct18 2s infinite;
-    left: 5%;
-    top: 65%;
-     }
-                                                
-@keyframes ct18 {
-    25% {color: rgb(255, 0, 0);}
-    50% {color: rgb(0, 17, 199);}
-    5% {color: #84ff00;}
-    }
-
-.ch19 {
-    color: #fff;
-    animation: ct19 2.5s infinite;
-    left: 20%;
-    top: 65%;
-    }
-                                                    
-@keyframes ct19 {
-    25% {color: rgb(92, 255, 209);}
-    50% {color: rgb(0, 157, 255);}
-    5% {color: #1900ff;}
-        }
-
-.ch20 {
-    color: #fff;
-    animation: ct20 3s infinite;
-    left: 60%;
-    top: 7%;
-    }
-                                                            
-@keyframes ct20 {
-    25% {color: rgb(239, 92, 255);}
-    50% {color: rgb(0, 157, 255);}
-    5% {color: #0800ff;}
-    }
-
-.ch21 {
-    color: #fff;
-    animation: ct21 2s infinite;
-    left: 70%;
-    top: 1%;
-    }
-                                                                
-@keyframes ct21 {
-    25% {color: rgb(255, 92, 255);}
-    50% {color: rgb(0, 157, 255);}
-    5% {color: #ff5500;}
-    }
-
-.ch22 {
-    color: #fff;
-    animation: ct22 2s infinite;
-    left: 75%;
-    top: 35%;
-    }
-                                                                    
-@keyframes ct22 {
-    25% {color: rgb(92, 255, 209);}
-    50% {color: rgb(0, 157, 255);}
-    5% {color: #2200ff;}
-    }
-
-.ch23 {
-    color: #fff;
-    animation: ct23 2s infinite;
-    left: 65%;
-    top: 88%;
-    }
-                                                                        
-@keyframes ct23 {
-    25% {color: rgb(92, 255, 209);}
-    50% {color: rgb(0, 157, 255);}
-    5% {color: #ff6600;}
-    }
-
-.ch24 {
-    color: #fff;
-    animation: ct24 2s infinite;
-    left: 2%;
-    top: 45%;
-    }
-                                                                            
-@keyframes ct24 {
-    25% {color: rgb(92, 255, 209);}
-    50% {color: rgb(0, 157, 255);}
-    5% {color: #f200ff;}
-    }
-
-.ch25 {
-    color: #fff;
-    animation: ct25 2s infinite;
-    left: 2%;
-    top: 73%;
-    }
-                                                                                
-@keyframes ct25 {
-    25% {color: rgb(92, 255, 209);}
-    50% {color: rgb(0, 157, 255);}
-    5% {color: #0040ff;}
-    }
-
-.ch26 {
-    color: #fff;
-    animation: ct26 2s infinite;
-    left: 25%;
-    top: 2%;
-    }
-                                                                                    
-@keyframes ct26 {
-    25% {color: rgb(92, 255, 209);}
-    50% {color: rgb(0, 157, 255);}
-    5% {color: #ff00ee;}
-    }
-
-.ch27 {
-    color: #fff;
-    animation: ct27 2s infinite;
-    left: 55%;
-    top: 2%;
-    }
-                                                                                        
-@keyframes ct27 {
-    25% {color: rgb(255, 95, 92);}
-    50% {color: rgb(0, 157, 255);}
-    5% {color: #000dff;}
-    }
-
-.ch28 {
-    color: #fff;
-    animation: ct28 3s infinite;
-    left: 53%;
-    top: 70%;
-    }
-                                                                                            
-@keyframes ct28 {
-    25% {color: rgb(255, 92, 231);}
-    50% {color: rgb(0, 200, 255);}
-    5% {color: #000dff;}
-    }
-
-.ch29 {
-    color: #fff;
-    animation: ct29 2.5s infinite;
-    left: 55%;
-    top: 50%;
-    }
-                                                                                                
-@keyframes ct29 {
-    25% {color: rgb(0, 153, 255);}
-    50% {color: rgb(255, 71, 200);}
-    5% {color: rgb(255, 81, 0);}
-    }
-
-.ch30 {
-    color: #fff;
-    animation: ct30 3s infinite;
-    left: 42%;
-    top: 55%;
-    }
-                                                                                                    
-@keyframes ct30 {
-    25% {color: rgb(0, 255, 174);}
-    50% {color: rgb(255, 71, 200);}
-    5% {color: rgb(0, 13, 255);}
-    }
-
-.ch31 {
-    color: #fff;
-    animation: ct31 2s infinite;
-    left: 85%;
-    top: 55%;
-    }
-                                                                                                        
-@keyframes ct31 {
-    25% {color: rgb(0, 140, 255);}
-    50% {color: rgb(255, 71, 200);}
-    5% {color: rgb(255, 115, 0);}
-    }
-
-.ch32 {
-    color: #fff;
-    animation: ct32 3s infinite;
-    left: 28%;
-    top: 75%;
-     }
-                                                                                                
-@keyframes ct32 {
-    25% {color: rgb(255, 201, 92);}
-    50% {color: rgb(0, 119, 255);}
-    5% {color: #00ff37;}
-    }
-
-.ch33 {
-    color: #fff;
-    animation: ct33 3s infinite;
-    left: 88%;
-    top: 32%;
-     }
-                                                                                                    
-@keyframes ct33 {
-    25% {color: rgb(255, 201, 92);}
-    50% {color: rgb(0, 119, 255);}
-    5% {color: #ff8400;}
-     }
-
-.ch34 {
-    color: #fff;
-    animation: ct34 3s infinite;
-    left: 55%;
-    top: 18%;
-        }
-                                                                                                        
-@keyframes ct34 {
-    25% {color: rgb(255, 201, 92);}
-    50% {color: rgb(0, 119, 255);}
-    5% {color: #ff8400;}
-        }
-
-.ch35 {
-    color: #fff;
-    animation: ct35 3s infinite;
-    left: 13%;
-    top: 18%;
-    }
-                                                                                                                
-@keyframes ct35 {
-    25% {color: rgb(228, 92, 255);}
-    50% {color: rgb(0, 85, 255);}
-    5% {color: #ff8400;}
-    }    
-
-.ch36 {
-    color: #fff;
-    animation: ct36 3s infinite;
-    left: 2%;
-    top: 25%;
-    }
-                                                                                                                    
-@keyframes ct36 {
-    25% {color: rgb(92, 157, 255);}
-    50% {color: rgb(255, 77, 0);}
-    5% {color: #0004ff;}
-    }    
-
-.ch37 {
-    color: #fff;
-    animation: ct37 1s infinite;
-    left: 88%;
-    top: 1%;
-    }
-                                                                                                                        
-@keyframes ct37 {
-    25% {color: rgb(92, 157, 255);}
-    50% {color: rgb(255, 77, 0);}
-    5% {color: #0004ff;}
-        }    
-
-.ch38 {
-    color: #fff;
-    animation: ct38 1.5s infinite;
-    left: 37%;
-    top: 40%;
-    }
-                                                                                                                                
-@keyframes ct38 {
-    25% {color: rgb(92, 157, 255);}
-    50% {color: rgb(255, 77, 0);}
-    5% {color: #0004ff;}
-    }    
-
-.ch39 {
-    color: #fff;
-    animation: ct39 2s infinite;
-    left: 22%;
-     top: 90%;
-     }
-                                                                                                                                    
-@keyframes ct39 {
-    25% {color: rgb(92, 157, 255);}
-    50% {color: rgb(255, 77, 0);}
-    5% {color: #0004ff;}
-    }    
-
-.ch40 {
-    color: #fff;
-    animation: ct40 3s infinite;
-    left: 42%;
-    top: 90%;
-    }
-                                                                                                                                        
-@keyframes ct40 {
-    25% {color: rgb(92, 255, 187);}
-    50% {color: rgb(255, 0, 225);}
-    5% {color: #0004ff;}
-    }    
-
-.ch41 {
-    color: #fff;
-    animation: ct41 1.5s infinite;
-    left: 62%;
-    top: 79%;
-    }
-                                                                                                                                            
-@keyframes ct41 {
-    25% {color: rgb(255, 92, 255);}
-    50% {color: rgb(0, 166, 255);}
-    5% {color: #0004ff;}
-    }    
-
-.ch42 {
-    color: #fff;
-    animation: ct42 2.5s infinite;
-    left: 66%;
-    top: 50%;
-    }
-                                                                                                                                                
-@keyframes ct42 {
-    25% {color: rgb(255, 92, 255);}
-    50% {color: rgb(0, 166, 255);}
-    5% {color: #0004ff;}
-    }    
-
-.ch43 {
-    color: #fff;
-    animation: ct43 1.5s infinite;
-    left: 45%;
-    top: 39%;
-    }
-                                                                                                                                                    
-@keyframes ct43 {
-    25% {color: rgb(255, 92, 255);}
-    50% {color: rgb(0, 166, 255);}
-    5% {color: #0004ff;}
-    }    
-
-.ch44 {
-    color: #fff;
-    animation: ct44 2s infinite;
-    left: 31%;
-    top: 29%;
-    }
-                                                                                                                                                        
-@keyframes ct44 {
-    25% {color: rgb(255, 92, 255);}
-    50% {color: rgb(0, 166, 255);}
-    5% {color: #0004ff;}
-    }    
-
-.ch45 {
-    color: #fff;
-    animation: ct45 1s infinite;
-    left: 31%;
-    top: 41%;
-    }
-                                                                                                                                                            
-@keyframes ct45 {
-    25% {color: rgb(255, 92, 255);}
-    50% {color: rgb(0, 166, 255);}
-    5% {color: #0004ff;}
-    }    
-
-.ch46 {
-    color: #fff;
-    animation: ct46 2s infinite;
-    left: 47%;
-    top: 51%;
-    }
-                                                                                                                                                                
-@keyframes ct46 {
-    25% {color: rgb(255, 92, 255);}
-    50% {color: rgb(0, 166, 255);}
-    5% {color: #0004ff;}
-    }    
-
-.ch47 {
-    color: #fff;
-    animation: ct47 1.5s infinite;
-    left: 38%;
-    top: 32%;
-    }
-                                                                                                                                                                    
-@keyframes ct47 {
-    25% {color: rgb(255, 92, 255);}
-    50% {color: rgb(0, 166, 255);}
-    5% {color: #0004ff;}
-    }    
-
-.ch48 {
-    color: #fff;
-    animation: ct48 2s infinite;
-    left: 35%;
-    top: 70%;
-    }
-                                                                                                                                                                        
-@keyframes ct48 {
-    25% {color: rgb(255, 92, 255);}
-    50% {color: rgb(0, 166, 255);}
-    5% {color: #0004ff;}
-    }    
-
-.ch49 {
-        color: #fff;
-        animation: ct49 2s infinite;
-        left: 70%;
-        top: 26%;
-        }
-                                                                                                                                                                            
-    @keyframes ct49 {
-        25% {color: rgb(255, 92, 255);}
-        50% {color: rgb(0, 166, 255);}
-        5% {color: #0004ff;}
-        }    
-
-.ch50 {
-    color: #fff;
-    animation: ct50 1.5s infinite;
-    left: 72%;
-    top: 15%;
-    }
-                                                                                                                                                                                
-@keyframes ct50 {
-    25% {color: rgb(255, 92, 255);}
-    50% {color: rgb(0, 166, 255);}
-    5% {color: #0004ff;}
-    }
-    
-.ch51 {
-    color: #fff;
-    animation: ct51 2.5s infinite;
-    left: 73%;
-    top: 39%;
-    }
-                                                                                                                                                                                    
-@keyframes ct51 {
-    25% {color: rgb(92, 241, 255);}
-    50% {color: rgb(255, 140, 0);}
-    5% {color: #e600ff;}
-    }
-    
-.ch52 {
-    color: #fff;
-    animation: ct52 2s infinite;
-    left: 71%;
-    top: 5%;
-    }
-                                                                                                                                                                                        
-@keyframes ct52 {
-    25% {color: rgb(92, 241, 255);}
-    50% {color: rgb(255, 140, 0);}
-    5% {color: #e600ff;}
-    }          
-
-.ch53 {
-    color: #fff;
-    animation: ct53 2.5s infinite;
-    left: 60%;
-    top: 92%;
-    }
-                                                                                                                                                                                            
-@keyframes ct53 {
-    25% {color: rgb(92, 241, 255);}
-    50% {color: rgb(255, 140, 0);}
-    5% {color: #e600ff;}
-    }
-    
-.ch54 {
-    color: #fff;
-    animation: ct54 2s infinite;
-    left: 59%;
-    top: 13%;
-    }
-                                                                                                                                                                                                
-@keyframes ct54 {
-    25% {color: rgb(92, 241, 255);}
-    50% {color: rgb(255, 140, 0);}
-    5% {color: #e600ff;}
-    }      
-
-.ch55 {
-    color: #fff;
-    animation: ct55 2s infinite;
-    left: 42%;
-    top: 17%;
-    }
-                                                                                                                                                                                                    
-@keyframes ct55 {
-    25% {color: rgb(92, 241, 255);}
-    50% {color: rgb(255, 140, 0);}
-    5% {color: #e600ff;}
-    }
-    
-.ch56 {
-    color: #fff;
-    animation: ct56 2s infinite;
-    left: 2%;
-    top: 37%;
-    }
-                                                                                                                                                                                                        
-@keyframes ct56 {
-    25% {color: rgb(255, 204, 0);}
-    50% {color: rgb(255, 34, 0);}
-    5% {color: #e600ff;}
-    }    
-
-.ch57 {
-    color: #fff;
-    animation: ct57 2s infinite;
-    left: 62%;
-    top: 24%;
-    }
-                                                                                                                                                                                                            
-@keyframes ct57 {
-    25% {color: rgb(255, 204, 0);}
-    50% {color: rgb(255, 34, 0);}
-    5% {color: #e600ff;}
-    }    
-
-.ch58 {
-    color: #fff;
-    animation: ct58 2s infinite;
-    left: 33%;
-    top: 12%;
-    }
-                                                                                                                                                                                                                
-@keyframes ct58 {
-    25% {color: rgb(255, 204, 0);}
-    50% {color: rgb(255, 34, 0);}
-    5% {color: #e600ff;}
-    }    
-
-.ch59 {
-    color: #fff;
-    animation: ct59 2.5s infinite;
-    left: 63%;
-    top: 3%;
-    }
-                                                                                                                                                                                                                    
-@keyframes ct59 {
-    25% {color: rgb(255, 204, 0);}
-    50% {color: rgb(255, 34, 0);}
-    5% {color: #e600ff;}
-    }    
-
-.ch60 {
-    color: #fff;
-    animation: ct60 2.5s infinite;
-    left: 80%;
-    top: 17%;
-    }
-                                                                                                                                                                                                                        
-@keyframes ct60 {
-    25% {color: rgb(255, 204, 0);}
-    50% {color: rgb(255, 34, 0);}
-    5% {color: #e600ff;}
-    }    
-
-.ch61 {
-    color: #fff;
-    animation: ct61 1.5s infinite;
-    left: 45%;
-    top: 71%;
-    }
-                                                                                                                                                                                                                            
-@keyframes ct61 {
-    25% {color: rgb(255, 204, 0);}
-    50% {color: rgb(255, 34, 0);}
-    5% {color: #e600ff;}
-    }    
-
-.ch62 {
-    color: #fff;
-    animation: ct62 2.5s infinite;
-    left: 72%;
-    top: 66%;
-    }
-                                                                                                                                                                                                                                
-@keyframes ct62 {
-    25% {color: rgb(255, 204, 0);}
-    50% {color: rgb(255, 34, 0);}
-    5% {color: #e600ff;}
-    }
-    
-.ch63 {
-    color: #fff;
-    animation: ct63 2.5s infinite;
-    left: 79%;
-    top: 91%;
-    }
-                                                                                                                                                                                                                                    
-@keyframes ct63 {
-    25% {color: rgb(255, 204, 0);}
-    50% {color: rgb(255, 34, 0);}
-    5% {color: #e600ff;}
-    } 
-/*
- * =======================================================
- * 📢 6. 모바일 반응형 레이아웃 (정렬 보강)
- * =======================================================
- */
-
-/* 모든 갤러리 요소의 간격을 동일하게 설정 (PC/모바일 공통) */
+/* ---------------------------------------------------- */
+/* 6. 메인 페이지 전용: Grid 갤러리 스타일 (4열 배치, 호버 효과) */
+/* ---------------------------------------------------- */
 .art-display-row {
-    /* 만약 기존에 gap이 없었다면 추가하여 요소 간의 간격을 통일 */
-    gap: 10px; /* 이미지 간 10px 간격 설정 */
-    justify-content: space-between; /* 양 끝 정렬 재확인 */
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); /* index.html은 4개 배치를 유지 */
+    gap: 70px; 
+    max-width: 1200px;
+    margin: 0 auto; 
+    padding: 0 50px 100px 50px; 
+
+    overflow-x: visible; 
+    overflow-y: visible; 
+}
+
+.art-display-row img {
+    width: 100%; 
+    height: auto; 
+    display: block; 
+    margin: 0;
+    padding: 0;
+    
+    cursor: pointer; 
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 1; 
+}
+
+.art-display-row img:hover {
+    transform: scale(1.03); 
+    opacity: 0.7; 
+}
+
+/* ---------------------------------------------------- */
+/* 7. 메인 페이지 모달 스타일 (이미지 확대, 흰색 블러) */
+/* ---------------------------------------------------- */
+.modal {
+    position: fixed; 
+    z-index: 100; 
+    padding-top: 50px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    
+    background-color: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(4px); 
+    -webkit-backdrop-filter: blur(4px); 
+
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 90%;
+    box-shadow: none !important;
+    border: none !important;
+}
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #333; 
+    font-size: 40px;
+    font-weight: bold;
+    transition: color 0.3s; 
+    cursor: pointer;
+}
+
+/* 모달 정보 표시 영역 스타일 */
+.modal-info {
+    position: absolute; 
+    top: 50px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    
+    background-color: transparent; 
+    color: black; 
+    
+    padding: 10px 20px;
+    border-radius: 5px;
+    
+    z-index: 101; 
+}
+
+.modal-info p {
+    margin: 0;
+    font-size: 16px; 
+    font-weight: 500;
+}
+/* ---------------------------------------------------- */
+
+/* ---------------------------------------------------- */
+/* 8. Drawing, Works, About, Contact 페이지 콘텐츠 패딩 (공통) */
+/* ---------------------------------------------------- */
+.drawing-content {
+    padding-top: 120px; /* PC에서의 상단 여백 */
+}
+
+/* ---------------------------------------------------- */
+/* 9. 메인 콘텐츠 (index.html) 스타일 (이미지 잘림 방지 수정 포함) */
+/* ---------------------------------------------------- */
+.main-content {
+    width: 100%; 
+    /* 상단 고정 헤더 아래에 이미지가 깔끔하게 시작하도록 여유로운 여백 확보 */
+    padding-top: 170px; 
 }
 
 
-/* 📱 모바일 및 태블릿 화면 (최대 768px 너비) */
+/* ---------------------------------------------------- */
+/* 📢 10. 모든 페이지 콘텐츠 반응형 (Grid 방식으로 최종 적용) */
+/* ---------------------------------------------------- */
+
+/* 📱 태블릿 (화면 너비 1024px 이하) */
+@media (max-width: 1024px) {
+    /* 메인 갤러리: 4열 -> 3열로 변경 */
+    .art-display-row {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px; 
+    }
+
+    /* Drawings/Works 갤러리: 3열 -> 2열로 변경 */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        padding: 0 30px; 
+    }
+
+    /* About/Contact 등 일반 콘텐츠 페이지 상단 여백 */
+    .drawing-content { 
+        padding-top: 100px; 
+    }
+}
+
+
+/* 📱 모바일 (화면 너비 768px 이하): 갤러리 2열, 헤더/본문 조정 */
 @media (max-width: 768px) {
     
-    /* 갤러리 이미지: 한 줄에 2개씩 배치 */
-    .art-display-row img {
-        /*
-         * 너비 계산 보강: (100% - gap 간격) / 2
-         * 이미지 2개와 그 사이의 10px 간격을 정확히 반영하여 흐트러짐 방지
-         */
-        width: calc(50% - 5px); /* 10px 간격의 절반인 5px를 50%에서 뺌 */
-        margin-bottom: 10px; /* 줄 간격도 10px로 통일 */
-    }
-    
-    /* 헤더 메뉴: 모바일에서 세로로 깔끔하게 정렬 */
+    /* 1. 상단 헤더 메뉴 모바일 최적화 (세로 정렬) */
     .main-header {
-        flex-direction: column; /* 로고와 메뉴를 세로로 쌓기 */
-        align-items: center; /* 가운데 정렬 */
+        flex-direction: column; 
+        align-items: center; 
+        padding: 15px 20px 10px 20px; 
     }
     
-    .main-nav {
-        width: 100%;
+    .main-nav ul {
+        flex-direction: column; 
+        align-items: center;
         margin-top: 10px;
     }
+    
+    .main-nav ul li {
+        margin: 5px 0; 
+    }
 
-    .main-nav ul {
-        flex-direction: column; /* 메뉴 항목 세로 정렬 */
-        align-items: center;
-        gap: 0;
+    /* 2. 갤러리 (메인, Drawings, Works) 모두 2열로 통일 */
+    .art-display-row, .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px; 
+        padding: 0 15px 50px 15px; 
+    }
+
+    /* 3. 메인 콘텐츠 상단 패딩 조정 */
+    .main-content {
+        /* 모바일 헤더가 세로로 길어지므로 여백을 늘려 이미지가 가려지지 않도록 보강 */
+        padding-top: 140px; 
     }
     
-    .main-nav li {
-        margin: 5px 0; /* 세로 간격 */
+    /* 4. Drawings/Works/About/Contact 페이지의 본문 패딩 조정 */
+    .drawing-content { 
+        padding-top: 80px; 
+        padding-left: 15px;
+        padding-right: 15px;
+        line-height: 1.5;
     }
     
-    /* 아주 작은 화면 (예: 480px 이하)에서는 1열로 변경 */
-    @media (max-width: 480px) {
-        .art-display-row img {
-            width: 100%; /* 한 줄에 1개씩 보이도록 */
-        }
+    /* 5. 왼쪽 하단 드로잉 이미지 크기/위치 조정 */
+    .small-drawing {
+        width: 50px; 
+        left: 15px; 
+        bottom: 15px; 
+    }
+}
+
+
+/* 📱 초소형 모바일 (화면 너비 480px 이하): 갤러리 1열, 텍스트 크기 조정 */
+@media (max-width: 480px) {
+    /* 갤러리를 1열로 변경 */
+    .art-display-row, .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* 텍스트 가독성 및 공간 확보 */
+    .main-header .logo a, 
+    .main-nav a,
+    .modal-info p {
+        font-size: 0.9em; 
     }
 }
