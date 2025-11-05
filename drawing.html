@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yoon sun Ahn - Drawing</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="drawing.css"> 
-</head>
+    </head>
 <body>
     <header class="main-header">
         <h1 class="logo">
@@ -26,40 +25,69 @@
         <section class="gallery-grid">
             
             <div class="gallery-item">
-                <a href="drawing-1.html">
-                    <img src="hacoo.jpg" alt="Drawing 1">
-                </a>
+                <img 
+                    src="images/hacoo.jpg" 
+                    alt="Drawing 1"
+                    onclick="openModal(this)"
+                    data-caption="Hacoo"
+                >
             </div>
             <div class="gallery-item">
-                <a href="drawing-2.html">
-                    <img src="tree.png" alt="Drawing 2">
-                </a>
+                <img 
+                    src="images/tree.png" 
+                    alt="Drawing 2"
+                    onclick="openModal(this)"
+                    data-caption="Tree"
+                >
             </div>
             <div class="gallery-item">
-                <a href="drawing-3.html">
-                    <img src="blue.png" alt="Drawing 3">
-                </a>
+                <img 
+                    src="images/blue.png" 
+                    alt="Drawing 3"
+                    onclick="openModal(this)"
+                    data-caption="Blue"
+                >
             </div>
             <div class="gallery-item">
-                <a href="drawing-4.html">
-                    <img src="hom.png" alt="Drawing 4">
-                </a>
+                <img 
+                    src="images/hom.png" 
+                    alt="Drawing 4"
+                    onclick="openModal(this)"
+                    data-caption="Hom"
+                >
             </div>
             <div class="gallery-item">
-                <a href="drawing-5.html">
-                    <img src="drawing-5.jpg" alt="Drawing 5">
-                </a>
+                <img 
+                    src="images/drawing-5.jpg" 
+                    alt="Drawing 5"
+                    onclick="openModal(this)"
+                    data-caption="Drawing 5"
+                >
             </div>
             <div class="gallery-item">
-                <a href="drawing-6.html">
-                    <img src="drawing-6.jpg" alt="Drawing 6">
-                </a>
+                <img 
+                    src="images/drawing-6.jpg" 
+                    alt="Drawing 6"
+                    onclick="openModal(this)"
+                    data-caption="Drawing 6"
+                >
             </div>
             
         </section>
     </main>
 
-    <img src="draw.png" alt="왼쪽 하단 드로잉" class="small-drawing">
+    <img src="images/draw.png" alt="왼쪽 하단 드로잉" class="small-drawing">
 
-    </body>
+    <div id="myModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div class="modal-info">
+            <p id="caption"></p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script src="header.js"></script>
+    
+</body>
 </html>
